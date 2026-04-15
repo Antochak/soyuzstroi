@@ -1,0 +1,214 @@
+.carousel {
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Added to position controls absolutely */
+}
+
+/* Classes to control the number of visible slides */
+.carousel .slides .slide,
+.carousel .slides.show-1 .slide {
+    flex: 0 0 100%;
+}
+
+.carousel .slides.show-2 .slide {
+    flex: 0 0 50%;
+}
+
+.carousel .slides {
+    display: flex;
+    overflow-x: auto;
+    margin: 0 -12px;
+    scroll-snap-type: x mandatory; /* Для привязки к элементам при скролле */
+    -webkit-overflow-scrolling: touch; /* Улучшение прокрутки на мобильных устройствах */
+    overflow-y: auto; /* Позволяет вертикальную прокрутку */
+    scrollbar-width: none; /* Скрывает полосу прокрутки в Firefox */
+}
+
+.carousel .slides::-webkit-scrollbar {
+    display: none; /* Скрывает полосу прокрутки в Chrome и Safari */
+}
+
+/* Стиль для элементов внутри карусели */
+.carousel .slide {
+    display: inline-block;
+    scroll-snap-align: start;
+    padding: 12px;
+    display: none; /* По умолчанию скрываем слайды */
+}
+
+.carousel .slide.show {
+    display: inline-block; /* Показываем слайды, которые должны быть видимыми */
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls:not(.external) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.controls.external {
+    gap: 16px;
+}
+
+.controls button {
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0px 2px 8px rgba(17, 17, 30, 0.15);
+    cursor: pointer;
+    pointer-events: all; /* Enable clicks on buttons */
+}
+
+.controls.dark button {
+    background: rgba(28, 28, 30, 0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+
+    /* по умолчанию скрывам кнопки и показываем управляем их отображение из javascript */
+    /* только темные кнопки будут так вести себя, потому что они внури карусели, а быелы могу быть снаружи и не должны скрываться */
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.controls button.visible {
+    visibility: visible;
+    pointer-events: all;
+}
+
+.controls .prev {
+    margin-left: 10px; /* Adjust the margin as needed */
+}
+
+.controls .next {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.carousel .indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+
+.carousel .indicators.inside {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+}
+
+.carousel .indicator {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(60, 60, 67, 0.2);
+    border-radius: 50%;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Плавный переход при изменении цвета */
+}
+
+.carousel .indicator.active {
+    background-color: #1047B0;
+    width: 10px;
+    height: 10px;
+}
+
+.carousel .indicators.inside .indicator {
+    background-color: rgba(28, 28, 30, 0.5);
+}
+
+.carousel .indicators.inside .indicator.active {
+    background-color: #1047B0;
+}
+
+@media (max-width: 1200px) {
+    .carousel.with-padding-in-indicators .indicators {
+        padding: 16px 0 80px;  
+    }
+}
+
+@media (max-width: 899px) {
+    .carousel .indicators.inside {
+        bottom: 4px;
+    }
+}
+
+@media (max-width: 600px) {
+    .carousel .slides {
+        display: flex;
+        overflow-x: auto;
+        margin: 16px 10px 0;
+        scroll-snap-type: x mandatory;
+        /* Для привязки к элементам при скролле */
+        -webkit-overflow-scrolling: touch;
+        /* Улучшение прокрутки на мобильных устройствах */
+    }
+
+    .carousel .slides.mobile-full-screen {
+        margin: 0;
+        gap: 12px;
+    }
+
+    .carousel .slides.mobile-full-screen .slide.show {
+        padding: 0;
+    }
+
+    /* Стиль для элементов внутри карусели */
+    .carousel .slide {
+        display: inline-block;
+        scroll-snap-align: start;
+        padding: 12px;
+    }
+
+    .carousel .slide {
+        display: none;
+        /* По умолчанию скрываем слайды */
+    }
+
+    .carousel .slide.show {
+        display: inline-flex;
+        width: 100%;
+        /* Показываем слайды, которые должны быть видимыми */
+    }
+
+    .carousel.with-padding-in-indicators .indicators {
+        padding: 4px;
+    }
+    
+    .controls {
+        display: none;
+    }
+
+    .carousel .indicators {
+        padding: 4px 0;
+    }
+
+    .carousel .indicator {
+        width: 6px;
+        height: 6px;
+        margin: 0 2px;
+        /* Плавный переход при изменении цвета */
+    }
+
+    .carousel .indicator.active {
+        width: 8px;
+        height: 8px;
+    }
+}
