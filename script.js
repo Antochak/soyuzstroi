@@ -61,7 +61,7 @@ buttons.forEach((button) => {
         // добавляем ниже отдельно, тут ничего не делаем
     } else {
         button.addEventListener('click', function() {
-            ym(97456114, 'reachGoal', 'button_click');
+            ym(108718761, 'reachGoal', 'button_click');
         });
     }
 });
@@ -78,6 +78,6 @@ document.querySelectorAll('.tag').forEach((btn) => {
 
 document.querySelectorAll('[data-metrika]').forEach(button => {
     const metrikaId = button.dataset.metrika;
-    ym(97456114,'reachGoal', metrikaId)
+    ym(108718761,'reachGoal', metrikaId)
 })
 
